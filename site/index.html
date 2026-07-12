@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 标题与描述由 main.js 从 site.config.json 注入 -->
+  <title>Portfolio</title>
+  <meta name="description" content="Fashion design portfolio — digital lookbook">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 注意：全站无任何外部 CDN 依赖（无 Google Fonts / unpkg），确保中国大陆可稳定加载 -->
+</head>
+<body>
+
+  <!-- 书脊页码轨：标记当前浏览到 lookbook 的第几页（签名元素） -->
+  <aside class="spine" id="spine" aria-hidden="true">
+    <span class="spine-label">LOOKBOOK</span>
+    <span class="spine-page" id="spinePage">P.00</span>
+    <span class="spine-total" id="spineTotal">/ 00</span>
+  </aside>
+
+  <!-- ①报头式 Hero -->
+  <header class="masthead">
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 class="masthead-name" id="mastheadName" aria-label=""></h1>
+    <p class="masthead-tagline" id="tagline"></p>
+    <div class="masthead-rule"></div>
+    <div class="masthead-meta">
+      <span id="projectTitle"></span>
+      <span id="projectYear"></span>
+    </div>
+  </header>
+
+  <!-- ② 项目引言 -->
+  <section class="intro">
+    <h2 class="intro-sub" id="projectSubtitle"></h2>
+    <p class="intro-desc" id="projectDesc"></p>
+  </section>
+
+  <!-- ③ 作品：lookbook 逐页画廊（由 manifest.json 生成） -->
+  <main class="plates" id="plates" aria-label="Portfolio pages"></main>
+
+  <!-- ④ About -->
+  <section class="about">
+    <p class="section-label">ABOUT</p>
+    <p class="about-text" id="aboutText"></p>
+  </section>
+
+  <!-- ⑤ Contact -->
+  <section class="contact">
+    <p class="section-label">CONTACT</p>
+    <ul class="contact-list" id="contactList"></ul>
+  </section>
+
+  <footer class="footer">
+    <p id="footerNote"></p>
+  </footer>
+
+  <!-- 灯箱：点击任意页放大，← → 翻页，Esc 关闭 -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged page view" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous page">‹</button>
+    <img class="lb-img" id="lbImg" alt="">
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next page">›</button>
+    <p class="lb-caption" id="lbCaption"></p>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

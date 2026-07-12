@@ -1,0 +1,304 @@
+/* ============================================================
+   Digital Lookbook — editorial stylesheet
+   调色板与字体刻意贴合时装刊物语言：
+   纸白 + 墨黑 + 唇膏红一处点睛；Didot/Bodoni 报头（系统自带，
+   不依赖任何外部字体 CDN —— 保证中国大陆加载稳定）
+   ============================================================ */
+
+:root {
+  --paper: #FAFAF8;        /* 铜版纸白 */
+  --ink: #121212;          /* 墨黑 */
+  --lipstick: #C11119;     /* 唯一强调色 */
+  --grey: #6E6A64;         /* 图注灰 */
+  --hairline: #E5E2DC;     /* 发丝分隔线 */
+
+  --font-display: "Didot", "Bodoni MT", "Bodoni 72", "Playfair Display",
+                  "Songti SC", "STSong", Georgia, serif;
+  --font-body: "Helvetica Neue", Helvetica, "PingFang SC",
+               "Microsoft YaHei", Arial, sans-serif;
+
+  --plate-max: 980px;      /* 作品页最大宽度 */
+  --text-max: 640px;       /* 文本栏最大宽度 */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--lipstick); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--lipstick);
+  outline-offset: 3px;
+}
+
+/* ---------- 书脊页码轨（签名元素） ---------- */
+.spine {
+  position: fixed;
+  left: 0; top: 0;
+  height: 100vh;
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  border-right: 1px solid var(--hairline);
+  background: var(--paper);
+  z-index: 20;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+.spine-label {
+  writing-mode: vertical-rl;
+  color: var(--grey);
+}
+.spine-page {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--lipstick);
+  letter-spacing: 0.06em;
+}
+.spine-total { color: var(--grey); }
+
+/* 页面主体整体让出书脊宽度 */
+.masthead, .intro, .plates, .about, .contact, .footer {
+  margin-left: 56px;
+}
+
+/* ---------- ① 报头 ---------- */
+.masthead {
+  padding: 15vh 6vw 9vh;
+  border-bottom: 1px solid var(--ink);
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  color: var(--lipstick);
+  margin-bottom: 2.2rem;
+}
+.masthead-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 11vw, 8.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+/* 报头字符逐一上升入场（由 JS 拆分为 span） */
+.masthead-name .ch {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes rise { to { transform: translateY(0); } }
+
+.masthead-tagline {
+  margin-top: 1.6rem;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.masthead-rule {
+  margin-top: 3.5rem;
+  height: 1px;
+  background: var(--hairline);
+}
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.9rem;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.masthead-meta span:last-child { color: var(--grey); }
+
+/* ---------- ② 项目引言 ---------- */
+.intro {
+  padding: 9vh 6vw;
+  max-width: calc(var(--text-max) + 12vw);
+}
+.intro-sub {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+.intro-desc {
+  max-width: var(--text-max);
+  color: var(--grey);
+}
+
+/* ---------- ③ 作品逐页 ---------- */
+.plates {
+  display: flex;
+  flex-direction: column;
+  gap: 8vh;
+  padding: 4vh 6vw 12vh;
+  align-items: center;
+}
+.plate {
+  width: 100%;
+  max-width: var(--plate-max);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.plate.in {
+  opacity: 1;
+  transform: none;
+}
+.plate button {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: zoom-in;
+}
+.plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 12px 40px rgba(0,0,0,0.07);
+}
+.plate figcaption {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--grey);
+  text-transform: uppercase;
+}
+.plate figcaption .no { color: var(--lipstick); }
+
+/* ---------- ④⑤ About / Contact ---------- */
+.about, .contact {
+  padding: 8vh 6vw;
+  border-top: 1px solid var(--hairline);
+}
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  color: var(--lipstick);
+  margin-bottom: 1.6rem;
+}
+.about-text {
+  max-width: var(--text-max);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.75;
+}
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2.4rem;
+}
+.contact-list a, .contact-list span {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-list a:hover {
+  color: var(--lipstick);
+  border-color: var(--lipstick);
+}
+.contact-list .k {
+  color: var(--grey);
+  border: none;
+  margin-right: 0.5rem;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ---------- 页脚 ---------- */
+.footer {
+  padding: 4vh 6vw 6vh;
+  border-top: 1px solid var(--hairline);
+  font-size: 12px;
+  color: var(--grey);
+  letter-spacing: 0.08em;
+}
+
+/* ---------- 灯箱 ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(12,12,12,0.94);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox[hidden] { display: none; }
+.lb-img {
+  max-width: 88vw;
+  max-height: 88vh;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+.lb-close, .lb-nav {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-display);
+  line-height: 1;
+  padding: 12px;
+}
+.lb-close { top: 18px; right: 26px; font-size: 34px; }
+.lb-nav { top: 50%; transform: translateY(-50%); font-size: 48px; }
+.lb-prev { left: 18px; }
+.lb-next { right: 18px; }
+.lb-caption {
+  position: absolute;
+  bottom: 22px;
+  left: 0; right: 0;
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+  .spine {
+    width: 100%;
+    height: 44px;
+    flex-direction: row;
+    padding: 0 18px;
+    border-right: none;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .spine-label { writing-mode: horizontal-tb; }
+  .masthead, .intro, .plates, .about, .contact, .footer { margin-left: 0; }
+  .masthead { padding-top: 16vh; }
+  .lb-nav { font-size: 36px; }
+}
+
+/* ---------- 降低动效偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .masthead-name .ch { animation: none; transform: none; }
+  .plate { opacity: 1; transform: none; transition: none; }
+}

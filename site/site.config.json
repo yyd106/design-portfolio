@@ -1,27 +1,26 @@
 {
-  "_说明": "这是全站唯一需要你编辑的内容文件。改完保存、重新部署即可，不需要碰任何 HTML/CSS/JS。",
-
-  "name": "YOUR NAME",
-  "name_zh": "你的名字",
+"name": "HOIIAN TANG",
+  "name_zh": "邓凯茵",
   "tagline": "Fashion Design Portfolio",
   "eyebrow": "SELECTED WORKS · 2024—2026",
 
   "project": {
-    "title": "MOSCHINO — Project I",
+    "title": "MOSCHINO",
     "subtitle": "A capsule collection study",
     "year": "2026",
-    "description": "在这里写一段项目简介：概念来源、面料与工艺、想解决的问题。两到三句即可，页面会自动排版。"
+    "description": "该项目是分析Moschino在2024年的市场定位和营销等，同时分析其他相识品牌为何成功以及分析Moschino目前的SWTO等问题，提出了该品牌可以在设计和市场定位上的调整同时分析2023-2024的流行趋势"
   },
 
-  "about": "在这里写一段自我介绍：背景、擅长的方向、正在寻找的机会。建议不超过 120 字。",
+  "about": "本人具备时装设计与奢侈品管理在读背景。曾深度沉浸于GQ时尚杂志、BALMAIN、Cartier等国际顶尖品牌与媒体生态。同時深耕服装造型、高净值客户销售、全渠道新媒体营销及数据驱动直播等多个核心板块，在多项工作中实现显著业绩突破。兼具创意视觉思维与敏锐商业洞察，熟练掌握中粤英三语，期待能在奢侈品管理领域深耕",
 
   "contact": {
-    "email": "hello@example.com",
+    "email": "kaiyin202401@163.com",
     "instagram": "",
     "xiaohongshu": "",
-    "wechat": "",
+    "wechat": "KoccKouu123",
     "linkedin": ""
   },
 
   "footer_note": "© 2026 · Portfolio built as a digital lookbook"
 }
+
